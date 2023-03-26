@@ -156,6 +156,8 @@ const data = [
 
 loadingData(data);
 
+// rendering data on the page function
+
 function loadingData(data) {
   data.forEach((element) => {
     const newDiv = document.createElement("div");
@@ -191,28 +193,61 @@ function loadingData(data) {
   });
 }
 
+let counter = 0;
+const array = [];
+const filterKeyword = [];
+let filteredJobs;
+
+// filter function
+
 function filterData(param) {
-  const filteredJobs = data.filter((job) =>
-    job.languages.includes(String(param))
-  );
+  filterKeyword.push(param);
+  if (counter === 0) {
+    filteredJobs = data.filter((job) => job.languages.includes(String(param)));
+    array.length = 0;
+    array.push(...filteredJobs);
+    counter++;
+  } else {
+    filteredJobs = array.filter((job) => job.languages.includes(String(param)));
+    array.length = 0;
+
+    array.push(...filteredJobs);
+  }
 
   sectionElement.innerHTML = "";
   const div = document.createElement("div");
-  div.innerHTML = `<div class="filter-container"> <div><button class="btn">${param} <img src="/images/icon-remove.svg" alt=""></button></div> <button class="clear_btn">clear</button></div>`;
+  div.innerHTML = `<div class="filter-container"> <div>${filterKeyword
+    .map(
+      (item) =>
+        `<button class="btn">${item}<img src="/images/icon-remove.svg" alt=""></button>`
+    )
+    .join("")} </div> <button class="clear_btn">clear</button></div>`;
   sectionElement.append(div);
-  loadingData(filteredJobs);
+  loadingData(array);
 }
 
+// clearing the search
+
 document.addEventListener("click", (e) => {
-  console.log(e.target.classList.contains("clear_btn"));
   if (!e.target.classList.contains("clear_btn")) {
-    console.log("semthing went wrong!");
+    return "someting went wrong !";
   } else {
     sectionElement.innerHTML = "";
+    array.length = 0;
+    counter = 0;
+    filterKeyword.length = 0;
     loadingData(data);
   }
 });
 
+// filter event listener
+
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("filter_btn")) filterData(e.target.innerHTML);
+});
+
+// clearing filter keys
+
+document.addEventListener("click", (e) => {
+  console.log(e.target.closest(".filter-container"));
 });
