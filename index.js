@@ -258,14 +258,19 @@ document.addEventListener("click", (e) => {
 // clearing filter keys
 
 document.addEventListener("click", (e) => {
-  // console.log(e.target.classList.contains("btn"));
-  // if (
-  //   e.target.closest(".filter-container") &&
-  //   e.target.classList.contains("btn")
-  // ) {
-  //   const index = filterKeyword.indexOf(e.target.innerText);
-  //   const newArray = filterKeyword.splice(index);
-  //   console.log("it is new array", newArray);
-  //   renderingFilteredData(newArray);
-  // }
+  console.log(e.target.classList.contains("btn"));
+  if (
+    e.target.closest(".filter-container") &&
+    e.target.classList.contains("btn")
+  ) {
+    const index = filterKeyword.indexOf(e.target.innerText);
+    filterKeyword.splice(index, 1);
+
+    const isArray = data.filter((item) => {
+      return filterKeyword.every((skill) => item.languages.includes(skill));
+    });
+
+    renderingFilteredData(filterKeyword);
+    loadingData(isArray);
+  }
 });
