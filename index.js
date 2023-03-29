@@ -193,6 +193,18 @@ function loadingData(data) {
   });
 }
 
+function renderingFilteredData(arr) {
+  sectionElement.innerHTML = "";
+  const div = document.createElement("div");
+  div.innerHTML = `<div class="filter-container"> <div>${arr
+    .map(
+      (item) =>
+        `<button class="btn">${item}<img src="/images/icon-remove.svg" alt=""></button>`
+    )
+    .join("")} </div> <button class="clear_btn">clear</button></div>`;
+  sectionElement.append(div);
+}
+
 let counter = 0;
 const array = [];
 const filterKeyword = [];
@@ -214,15 +226,8 @@ function filterData(param) {
     array.push(...filteredJobs);
   }
 
-  sectionElement.innerHTML = "";
-  const div = document.createElement("div");
-  div.innerHTML = `<div class="filter-container"> <div>${filterKeyword
-    .map(
-      (item) =>
-        `<button class="btn">${item}<img src="/images/icon-remove.svg" alt=""></button>`
-    )
-    .join("")} </div> <button class="clear_btn">clear</button></div>`;
-  sectionElement.append(div);
+  renderingFilteredData([...new Set(filterKeyword)]);
+
   loadingData(array);
 }
 
@@ -243,11 +248,24 @@ document.addEventListener("click", (e) => {
 // filter event listener
 
 document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("filter_btn")) filterData(e.target.innerHTML);
+  if (
+    e.target.closest(".btn-container") &&
+    e.target.classList.contains("filter_btn")
+  )
+    filterData(e.target.innerHTML);
 });
 
 // clearing filter keys
 
 document.addEventListener("click", (e) => {
-  console.log(e.target.closest(".filter-container"));
+  // console.log(e.target.classList.contains("btn"));
+  // if (
+  //   e.target.closest(".filter-container") &&
+  //   e.target.classList.contains("btn")
+  // ) {
+  //   const index = filterKeyword.indexOf(e.target.innerText);
+  //   const newArray = filterKeyword.splice(index);
+  //   console.log("it is new array", newArray);
+  //   renderingFilteredData(newArray);
+  // }
 });
