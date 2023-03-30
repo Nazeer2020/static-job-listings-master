@@ -7,7 +7,7 @@
     --clr-neutral-900: hsl(180, 14%, 20%);
     --clr-neutral-800: hsl(180, 8%, 52%);
     --clr-neutral-200: hsl(180, 31%, 95%);
-    --clr-neutral-100: hsl(180, 52%, 96%);
+    --clr-neutral-100: hsl(180, 52%, 99%);
 
     --ff-primary: 'League Spartan',
         sans-serif;;
@@ -147,39 +147,61 @@ button {
 }
 
 .btn {
+    background-image: url("./images/icon-remove.svg");
+    background-position: right;
+    background-repeat: no-repeat;
     display: inline-flex;
     justify-content: space-between;
     align-items: center;
     column-gap: var(--size-200);
     padding: 0;
     padding-inline-start: var(--size-200);
+    padding-inline-end: var(--size-500);
     margin-inline-start: var(--size-100);
 }
 
-.btn img {
-   background-color: var(--clr-primary-400);
-   height: 100%;
-}
 
-.btn:hover,
-.clear_btn:hover {
-    background-color: none;
-}
 
-.btn img:hover {
-    background-color: #000;
-}
+
+
 
 .clear_btn {
     background-color: transparent;
     box-shadow: none;
+    position: relative;
 }
 
+.clear_btn::after {
+    
+    content: '';
+    position: absolute;
+    top: 70%;
+    left: 0;
+    right: 0;
+    bottom:0;
+    height: 1px;
+    width: 70%;
+    margin-inline: auto;
+    background-color: var(--clr-primary-400);
+    -webkit-transform: scaleX(0);
+        transform: scaleX(0);
+        -webkit-transform-origin: right;
+        transform-origin: right;
+        transition: -webkit-transform 250ms ease-in;
+        transition: transform 250ms ease-in;
+        transition: transform 250ms ease-in, -webkit-transform 250ms ease-in;
+}
 
+.clear_btn:hover::after {
+    -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+        -webkit-transform-origin: left;
+        transform-origin: left;
+}
 
-button:hover,
-button:focus,
-button:visited {
+.filter_btn:hover,
+.filter_btn:focus,
+.filter_btn:visited {
     background-color: var(--clr-primary-400);
     color: var(--clr-neutral-100);
 }
@@ -236,7 +258,7 @@ section {
     padding: var(--size-400);
     box-shadow: 0 5px 20px -10px var(--clr-neutral-800);
     border-radius: var(--size-100);
-    margin-block-end: var(--size-700);
+    margin-block-end: var(--size-600);
 }
 
 .job-container:nth-child(-n+2) {

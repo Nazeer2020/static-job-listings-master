@@ -197,10 +197,7 @@ function renderingFilteredData(arr) {
   sectionElement.innerHTML = "";
   const div = document.createElement("div");
   div.innerHTML = `<div class="filter-container"> <div>${arr
-    .map(
-      (item) =>
-        `<button class="btn">${item}<img src="/images/icon-remove.svg" alt=""></button>`
-    )
+    .map((item) => `<button class="btn">${item}</button>`)
     .join("")} </div> <button class="clear_btn">clear</button></div>`;
   sectionElement.append(div);
 }
