@@ -147,21 +147,34 @@ button {
 }
 
 .btn {
-    background-image: url("./images/icon-remove.svg");
+    /* background-image: url("./images/icon-remove.svg");
     background-position: right;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
     display: inline-flex;
     justify-content: space-between;
     align-items: center;
     column-gap: var(--size-200);
     padding: 0;
     padding-inline-start: var(--size-200);
-    padding-inline-end: var(--size-500);
+    /* padding-inline-end: var(--size-500); */
     margin-inline-start: var(--size-100);
+   
 }
 
 
+.btn img {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: auto;
+    right: 0;
+    height: 100%;
+    background-color: var(--clr-primary-400);
+}
 
+.btn img:hover {
+    background-color: #000;
+}
 
 
 

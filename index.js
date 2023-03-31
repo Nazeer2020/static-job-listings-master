@@ -197,7 +197,10 @@ function renderingFilteredData(arr) {
   sectionElement.innerHTML = "";
   const div = document.createElement("div");
   div.innerHTML = `<div class="filter-container"> <div>${arr
-    .map((item) => `<button class="btn">${item}</button>`)
+    .map(
+      (item) =>
+        `<button class="btn">${item} <img src="./images/icon-remove.svg"/></button>`
+    )
     .join("")} </div> <button class="clear_btn">clear</button></div>`;
   sectionElement.append(div);
 }
@@ -255,12 +258,11 @@ document.addEventListener("click", (e) => {
 // clearing filter keys
 
 document.addEventListener("click", (e) => {
-  console.log(e.target.classList.contains("btn"));
-  if (
-    e.target.closest(".filter-container") &&
-    e.target.classList.contains("btn")
-  ) {
-    const index = filterKeyword.indexOf(e.target.innerText);
+  if (e.target.closest(".btn") || e.target.classList.contains("btn")) {
+    const element = e.target.innerText || e.target.closest(".btn").innerText;
+
+    const index = filterKeyword.indexOf(element);
+
     filterKeyword.splice(index, 1);
 
     const isArray = data.filter((item) => {
